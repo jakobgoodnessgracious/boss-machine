@@ -3,8 +3,6 @@ const meetingsRouter = express.Router();
 const db = require('./db');
 const { createError, bodyValidatorCreator } = require('./utils');
 // /api/meetings
-// const required = { time: 'string', date: 'date', day: 'string' };
-// const bodyValidator = bodyValidatorCreator(required);
 
 meetingsRouter.get('/', (req, res, next) => {
     const meetings = db.getAllFromDatabase('meetings');
