@@ -32,21 +32,27 @@ export const updateIdea = idea => {
 // Thunks
 
 export const createIdeaThunk = idea => dispatch => {
+  const { weeklyRevenue, numWeeks } = idea;
+  idea = {
+    ...idea,
+    weeklyRevenue: weeklyRevenue ? Number(weeklyRevenue) : weeklyRevenue,
+    numWeeks: numWeeks ? Number(numWeeks) : numWeeks
+  }
   axios.post('http://localhost:4001/api/ideas', idea)
-  .then(res => res.data)
-  .then(createdIdea => {
-    dispatch(createIdea(createdIdea));
-  })
-  .catch(console.error.bind(console));
+    .then(res => res.data)
+    .then(createdIdea => {
+      dispatch(createIdea(createdIdea));
+    })
+    .catch(console.error.bind(console));
 }
 
 export const updateIdeaThunk = idea => dispatch => {
   axios.put(`http://localhost:4001/api/ideas/${idea.id}`, idea)
-  .then(res => res.data)
-  .then(updatedIdea => {
-    dispatch(updateIdea(updatedIdea));
-    dispatch(setSelectedIdea(updatedIdea));
-  });
+    .then(res => res.data)
+    .then(updatedIdea => {
+      dispatch(updateIdea(updatedIdea));
+      dispatch(setSelectedIdea(updatedIdea));
+    });
 }
 
 
@@ -55,7 +61,7 @@ export const updateIdeaThunk = idea => dispatch => {
 const initial = [];
 
 export default (initialState = initial, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case CREATE_IDEA:
       return [...initialState, action.idea];
     case SET_IDEAS:

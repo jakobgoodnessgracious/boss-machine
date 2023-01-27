@@ -49,18 +49,18 @@ class Idea extends Component {
 
   render() {
     const isValid = isMillionDollarIdea(this.state.idea.weeklyRevenue, this.state.idea.numWeeks);
-    const buttonText = this.state.editing ? ( isValid ? 'Save' : 'Not A Valid $1000000 Idea!') : 'Edit';
+    const buttonText = this.state.editing ? (isValid ? 'Save' : 'Not A Valid $1000000 Idea!') : 'Edit';
     return (
       <div>
         <div id="single-idea-landing">
-          { this.state.editing
+          {this.state.editing
             ? <IdeaEdit idea={this.props.idea} handleChange={this.handleChange} />
             : <IdeaDescription idea={this.props.idea} />
           }
           <div id="save-idea"
-               className={isValid ? "button save-button" : "button save-button disabled"}
-               onClick={isValid ? this.toggleEdit : () => {}} >
-            { buttonText }
+            className={isValid ? "button save-button" : "button save-button disabled"}
+            onClick={isValid ? this.toggleEdit : () => { }} >
+            {buttonText}
           </div>
         </div>
         <div className="button back-button">
@@ -73,7 +73,7 @@ class Idea extends Component {
   }
 }
 
-const mapState = ({selectedIdea, appState}) =>({
+const mapState = ({ selectedIdea, appState }) => ({
   idea: selectedIdea,
   newIdea: appState.editingNewIdea,
 });

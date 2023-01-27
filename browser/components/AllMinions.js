@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-import { deleteMinionThunk } from '../store/minions'; 
+import { deleteMinionThunk } from '../store/minions';
 
 const AllMinions = props => {
   const minions = props.minions.map(minion => {
@@ -14,17 +14,17 @@ const AllMinions = props => {
           <p>{name}</p>
           <p>ID #{minion.id}</p>
         </Link>
-        <img onClick={() => props.deleteMinion(minion.id)}  className="button x-button" src="public/img/x_button.svg" alt="" />
+        <img onClick={() => props.deleteMinion(minion.id)} className="button x-button" src="public/img/x_button.svg" alt="" />
       </div>
     )
   });
-  
+
   return (
     <div>
       <div id="minions-landing">
         <div id="minions-title" className="label minions-label">MINIONS.exe</div>
         <div id="all-minions">
-          { minions }
+          {minions}
           <div id="add-minion-button-grid" className="minion-grid">
             <Link to="/minions/new">
               <img id="add-minion-button" className="button" src="public/img/add_button.svg" alt="" />
@@ -41,7 +41,7 @@ const AllMinions = props => {
   )
 }
 
-const mapState = ({minions}) => ({
+const mapState = ({ minions }) => ({
   minions
 });
 
