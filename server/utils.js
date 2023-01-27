@@ -73,16 +73,19 @@ const bodyValidatorCreator = (required) => (req, res, next) => {
             }
         }
     }
-    Object.entries(req.body).forEach(([key, value]) => {
-        let type = required[key];
-        if (type && (type.put || type.post)) {
-            Object.entries(type).forEach(([key, value]) => {
+    Object.entries(required).forEach(([key, value]) => {
+        let type = value;
+        if (value && (value.put || value.post)) {
+            const entries = Object.entries(value);
+            for (const [key, val] of entries) {
                 if (req.method.toLowerCase() === key) {
-                    type = value;
-                }
-            });
+                    type = val;
+                } else { type = null }
+            };
         }
-        validate(type, key, value);
+        if (type) {
+            validate(type, key, req.body[key]);
+        }
     });
     if (requiredFields.length) {
         next(createError(400, `Required fields: [${requiredFields.toString()}] are malformed or missing from the request body.`))

@@ -1,5 +1,4 @@
 const express = require('express');
-const app = require('../server');
 const minionsRouter = express.Router();
 const db = require('./db');
 const { createError, bodyValidatorCreator } = require('./utils');

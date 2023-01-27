@@ -25,7 +25,6 @@ const apiRouter = require('./server/api');
 app.use('/api', apiRouter);
 app.use((err, req, res, next) => {
   const { status = 500, message } = err;
-  // console.log(req.url, status, err.stack);
   console.log(req.url, status, message || err);
   res.status(status).send(message);
 });
